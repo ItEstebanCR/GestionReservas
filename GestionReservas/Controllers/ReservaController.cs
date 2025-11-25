@@ -2,7 +2,7 @@
 using GestionReservas.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GestionReservas.Controllers  
+namespace GestionReservas.Controllers   
 {
     public class ReservasController : Controller
     {

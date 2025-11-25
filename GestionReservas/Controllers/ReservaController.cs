@@ -3,7 +3,7 @@ using GestionReservas.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestionReservas.Controllers
-{  
+{    
     public class ReservaController : Controller
     {
         private readonly ReservaRepositorio _repo;

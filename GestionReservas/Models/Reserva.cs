@@ -2,7 +2,7 @@
 
 namespace GestionReservas.Models
 {
-    public class Reserva 
+    public class Reserva   
     {
         [Required]
         [RegularExpression(@"^RES-\d{3}$", ErrorMessage = "El código debe tener el formato RES-###")]

@@ -1,14 +1,14 @@
-﻿using GestionReservas.Data;
+﻿using GestionReserva.Data;
 using GestionReservas.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GestionReservas.Controllers
+namespace GestionReservas.Controllers  
 {
-    public class ReservaController : Controller
+    public class ReservasController : Controller
     {
-        private readonly ReservaRepositorio _repo;
+        private readonly ReservasRepositorio _repo;
 
-        public ReservaController(ReservaRepositorio repo)
+        public ReservasController(ReservasRepositorio repo)
         {
             _repo = repo;
         }
@@ -16,31 +16,36 @@ namespace GestionReservas.Controllers
         // LISTADO
         public IActionResult Index()
         {
-            var datos = _repo.ObtenerTodas();
-            return View(datos);
+            var lista = _repo.ObtenerTodas();
+            return View(lista);
         }
 
-        // FORMULARIO
+        // GET -> FORMULARIO
         public IActionResult Crear()
         {
             return View();
         }
 
-        // GUARDAR
+        // POST -> GUARDAR
         [HttpPost]
-        public IActionResult Crear(Reserva reserva)
+        public IActionResult Crear(Reserva r)
         {
             if (!ModelState.IsValid)
-                return View(reserva);
-
-            var resultado = _repo.Agregar(reserva);
-
-            if (resultado != "OK")
             {
-                ModelState.AddModelError(string.Empty, resultado);
-                return View(reserva);
+                return View(r);
             }
 
+            // validar código duplicado
+            if (_repo.ExisteCodigo(r.CodigoReserva))
+            {
+                ModelState.AddModelError("CodigoReserva", "El código ya existe.");
+                return View(r);
+            }
+
+            // guardar
+            _repo.Agregar(r);
+
+            // volver al listado
             return RedirectToAction("Index");
         }
     }

@@ -1,0 +1,50 @@
+﻿@model List<GestionReservas.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Listado de Reservas";
+}
+  
+<h2 class="mt-4">Listado de Reservas</h2>
+
+<a asp-controller="Reservas" asp-action="Crear" class="btn btn-primary mb-3">
+    Crear nueva reserva
+</a>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-warning">
+        No hay reservas registradas.
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Código</th>
+                <th>Profesor</th>
+                <th>Correo</th>
+                <th>Laboratorio</th>
+                <th>Fecha</th>
+                <th>Hora Inicio</th>
+                <th>Hora Fin</th>
+                <th>Motivo</th>
+            </tr>
+        </thead>
+        <tbody> 
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>@r.CodigoReserva</td>
+                    <td>@r.NombreProfesor</td>
+                    <td>@r.Correo</td>
+                    <td>@r.Laboratorio</td>
+                    <td>@r.FechaReserva.ToString("yyyy-MM-dd")</td>
+                    <td>@r.HoraInicio</td>
+                    <td>@r.HoraFin</td>
+                    <td>@r.Motivo</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

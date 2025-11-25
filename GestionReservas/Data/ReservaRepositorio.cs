@@ -1,30 +1,29 @@
 ﻿using GestionReservas.Models;
 
-namespace GestionReservas.Data
+namespace GestionReserva.Data
 {
-    public class ReservaRepositorio
+    public class ReservasRepositorio
     {
-        private List<Reserva> _listaReserva = new List<Reserva>();
+        // Lista en memoria
+        private static List<Reserva> _reservas = new List<Reserva>();
 
+        // Obtener todas las reservas
         public List<Reserva> ObtenerTodas()
         {
-            return _listaReserva;
+            return _reservas;
         }
 
-        public string Agregar(Reserva reserva)
+        // Agregar una nueva reserva
+        public void Agregar(Reserva r)
         {
-            if (_listaReserva.Any(r => r.CodigoReserva == reserva.CodigoReserva))
-                return "El código de reserva ya existe.";
+            _reservas.Add(r);
+        }
 
-            if (reserva.HoraFin <= reserva.HoraInicio)
-                return "La hora de fin debe ser mayor a la hora de inicio.";
-
-            if (reserva.FechaReserva < DateTime.Today)
-                return "La fecha no puede ser en el pasado.";
-
-            _listaReserva.Add(reserva);
-
-            return "OK";
+        // Verificar si el código existe
+        public bool ExisteCodigo(string codigo)
+        {
+            return _reservas.Any(x => x.CodigoReserva == codigo);
         }
     }
 }
+ 

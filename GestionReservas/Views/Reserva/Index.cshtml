@@ -1,0 +1,36 @@
+﻿@model List<GestionReservas.Models.Reserva>
+
+<h2>Listado de Reservas</h2>
+
+<a href="/Reserva/Crear" class="btn btn-primary mb-3">Crear Nueva Reserva</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Profesor</th>
+            <th>Correo</th>
+            <th>Laboratorio</th>
+            <th>Fecha</th>
+            <th>Hora Inicio</th>
+            <th>Hora Fin</th>
+            <th>Motivo</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CodigoReserva</td>
+                <td>@item.NombreProfesor</td>
+                <td>@item.Correo</td>
+                <td>@item.Laboratorio</td>
+                <td>@item.FechaReserva.ToString("yyyy-MM-dd")</td>
+                <td>@item.HoraInicio</td>
+                <td>@item.HoraFin</td>
+                <td>@item.Motivo</td>
+            </tr>
+        }
+    </tbody>
+</table>
